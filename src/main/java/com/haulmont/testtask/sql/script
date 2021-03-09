@@ -1,0 +1,91 @@
+
+<--! BANK table -->
+CREATE TABLE [BANK]
+(
+ [ID]   varchar(50) NOT NULL ,
+ [NAME] varchar(50) NOT NULL ,
+
+
+ CONSTRAINT [PK_bank] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+GO
+
+<--! CREDIT table -->
+CREATE TABLE [CREDIT]
+(
+ [ID]            varchar(50) NOT NULL ,
+ [PERCENTE_RATE] decimal(18,4) NOT NULL ,
+ [LIMIT]         bigint NOT NULL ,
+ [BANK_ID]       varchar(50) NOT NULL ,
+
+
+ CONSTRAINT [PK_credit] PRIMARY KEY CLUSTERED ([ID] ASC),
+ CONSTRAINT [FK_76] FOREIGN KEY ([BANK_ID])  REFERENCES [BANK]([ID])
+);
+GO
+
+
+CREATE NONCLUSTERED INDEX [fkIdx_77] ON [CREDIT]
+ (
+  [BANK_ID] ASC
+ )
+
+GO
+
+<--! CREDIT_OFFER table -->
+
+CREATE TABLE [CREDIT_OFFER]
+(
+ [ID]                varchar(50) NOT NULL ,
+ [CREDIT_ID]         varchar(50) NOT NULL ,
+ [BANK_ID]           varchar(50) NOT NULL ,
+ [CLIENT_ID]         varchar(50) NOT NULL ,
+ [CREDIT_SUM]        bigint NOT NULL ,
+ [CREDIT_PERIOD]     int NOT NULL ,
+ [CREDIT_OFFER_DATE] date NOT NULL ,
+
+
+ CONSTRAINT [PK_credit_offer] PRIMARY KEY CLUSTERED ([ID] ASC),
+ CONSTRAINT [FK_67] FOREIGN KEY ([CREDIT_ID])  REFERENCES [CREDIT]([ID]),
+ CONSTRAINT [FK_70] FOREIGN KEY ([BANK_ID])  REFERENCES [BANK]([ID]),
+ CONSTRAINT [FK_73] FOREIGN KEY ([CLIENT_ID])  REFERENCES [dbo].[CLIENT]([ID])
+);
+GO
+
+
+CREATE NONCLUSTERED INDEX [fkIdx_68] ON [CREDIT_OFFER]
+ (
+  [CREDIT_ID] ASC
+ )
+
+GO
+
+CREATE NONCLUSTERED INDEX [fkIdx_71] ON [CREDIT_OFFER]
+ (
+  [BANK_ID] ASC
+ )
+
+GO
+
+CREATE NONCLUSTERED INDEX [fkIdx_74] ON [CREDIT_OFFER]
+ (
+  [CLIENT_ID] ASC
+ )
+
+GO
+
+<--! Client table -->
+CREATE TABLE [CLIENT]
+(
+ [ID]              varchar(50) NOT NULL ,
+ [FIRST_NAME]      varchar(50) NOT NULL ,
+ [LAST_NAME]       varchar(50) NOT NULL ,
+ [MIDDLE_NAME]     varchar(50) NOT NULL ,
+ [PHONE_NUMBER]    varchar(20) NOT NULL ,
+ [EMAIL]           varchar(50) NOT NULL ,
+ [PASSPORT_NUMBER] varchar(10) NOT NULL ,
+
+
+ CONSTRAINT [PK_clients] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+GO
