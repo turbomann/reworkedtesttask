@@ -1,4 +1,4 @@
-package com.haulmont.testtask.view.bankform;
+package com.haulmont.testtask.view.about;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
@@ -8,13 +8,13 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-@Route(value = "bank-form")
-@PageTitle("Babk Form")
-public class BankFormView  extends Div {
+@Route(value = "about")
+@PageTitle("About")
+public class About extends Div {
 
     private Button cancel = new Button("Back");
 
-    public BankFormView() {
+    public About() {
 
         add(createTitle());
         add(cancel);
@@ -26,7 +26,7 @@ public class BankFormView  extends Div {
     }
 
     private Component createTitle() {
-        return new H3("Add a new bank here");
+        return new H3("Lets talk about wine");
     }
 
 }
