@@ -1,12 +1,9 @@
 package com.haulmont.testtask.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
+import java.util.UUID;
 
 //@Entity
 //@Table(name = "CLIENTS" {
@@ -19,26 +16,32 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "CLIENT")
-public class Client extends BaseEntity implements Serializable {
+public class Client extends AbstractEntity implements Serializable {
 
-    private Integer id;
 
-    @Column(name = "FIRSTNAME", nullable = false, length = 100)
+    @Id
+//    @GeneratedValue(generator = "UUID")
+//    @GenericGenerator(name = "UUID",strategy = "org.hibernate.id.UUIDGenerator")
+    @GeneratedValue
+    @Column(name = "id", updatable = false, nullable = false)
+    private UUID id;
+
+    //    @Column(name = "FIRST_NAME", nullable = false, length = 100)
     private String firstName;
 
-//    @Column(name = "LASTNAME", nullable = false, length = 100)
+    //    @Column(name = "LAST_NAME", nullable = false, length = 100)
     private String lastName;
 
-//    @Column(name = "MIDDLENAME", nullable = false, length = 100)
+    //    @Column(name = "MIDDLE_NAME", nullable = false, length = 100)
     private String middleName;
 
-//    @Column(name = "TELEPHONENUMBER", unique = true, nullable = false, length = 100)
+    //    @Column(name = "PHONE_NUMBER", unique = true, nullable = false, length = 100)
     private String telephoneNumber;
 
-//    @Column(name = "CLIENTEMAIL", unique = true, nullable = false, length = 100)
+    //    @Column(name = "EMAIL", unique = true, nullable = false, length = 100)
     private String clientEmail;
 
-//    @Column(name = "CLIENTPASSPORTN", nullable = false, length = 100)
+    //    @Column(name = "PASSPORT_NUMBER", nullable = false, length = 100)
     private String clientPassportN;
 
     public String getFirstName() {
@@ -89,20 +92,21 @@ public class Client extends BaseEntity implements Serializable {
         this.clientPassportN = clientPassportN;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    public Integer getId() {
+    @Override
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    @Override
+    public void setId(UUID id) {
         this.id = id;
     }
+
 
     @Override
     public String toString() {
         return "Client{" +
-                "id=" + id +
+//                "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", middleName='" + middleName + '\'' +
@@ -110,5 +114,24 @@ public class Client extends BaseEntity implements Serializable {
                 ", clientEmail='" + clientEmail + '\'' +
                 ", clientPassportN='" + clientPassportN + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Client client = (Client) o;
+        return Objects.equals(id, client.id) &&
+                Objects.equals(firstName, client.firstName) &&
+                Objects.equals(lastName, client.lastName) &&
+                Objects.equals(middleName, client.middleName) &&
+                Objects.equals(telephoneNumber, client.telephoneNumber) &&
+                Objects.equals(clientEmail, client.clientEmail) &&
+                Objects.equals(clientPassportN, client.clientPassportN);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, middleName, telephoneNumber, clientEmail, clientPassportN);
     }
 }

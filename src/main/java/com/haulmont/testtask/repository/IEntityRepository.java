@@ -1,12 +1,19 @@
 package com.haulmont.testtask.repository;
 
-import com.haulmont.testtask.entity.BaseEntity;
+import com.haulmont.testtask.entity.AbstractEntity;
 
+import java.util.List;
 import java.util.UUID;
 
-public interface IEntityRepository<T extends BaseEntity>  {
-    //методы с hibertane
+public interface IEntityRepository<T extends AbstractEntity>  {
 
-    T getById(UUID id);
-    void save(T entity);
+    T findById(long id); //?
+
+    List<T> findAll();
+
+    void update(T dataSet);
+
+    void create(T dataSet);
+
+    void delete(long id);
 }

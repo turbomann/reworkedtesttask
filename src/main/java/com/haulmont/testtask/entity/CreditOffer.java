@@ -4,7 +4,7 @@ package com.haulmont.testtask.entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-public class CreditOffer extends BaseEntity {
+public class CreditOffer extends AbstractEntity {
    private int creditSum;
 
    @JoinColumn(name = "CLIENT_ID", nullable = false)

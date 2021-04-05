@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import com.haulmont.testtask.view.about.About;
 import com.haulmont.testtask.view.bankform.BankFormView;
-import com.haulmont.testtask.view.clientform.ClientFormView;
+import com.haulmont.testtask.view.clientform.ClientFormAdd;
 import com.haulmont.testtask.view.creditoffersform.CreditOfferFormView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentUtil;
@@ -60,8 +60,8 @@ public class MainView extends AppLayout {
             HorizontalLayout logoLayout = new HorizontalLayout();
             logoLayout.setId("logo");
             logoLayout.setAlignItems(FlexComponent.Alignment.CENTER);
-            logoLayout.add(new Image("images/money_icon.png","FREE CASH"));
-            logoLayout.add(new H1("FREE CASH"));
+            logoLayout.add(new Image("images/money_icon.png","CASH"));
+            logoLayout.add(new H1("CASH"));
             layout.add(logoLayout, menu);
             return layout;
         }
@@ -77,7 +77,7 @@ public class MainView extends AppLayout {
 
         private Component[] createMenuItems() {
             return new Tab[]{
-                    createTab("Client", ClientFormView.class),
+                    createTab("Client", ClientFormAdd.class),
                     createTab("Bank", BankFormView.class),
                     createTab("Credit List", CreditOfferFormView.class),
                     createTab("About Us", About.class)
